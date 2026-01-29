@@ -1,0 +1,1 @@
+# Time-lapse-cameras-for-snow-cover-monitoring-in-Chile
