@@ -4,17 +4,19 @@
   <meta charset="utf-8" />
   <title>Mapa Timelapse</title>
 
-  <!-- Leaflet -->
+  <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <style>
     body { margin: 0; font-family: Arial, sans-serif; }
     #map { height: 60vh; }
     #viewer { padding: 10px; }
+    video { max-width: 100%; height: auto; }
   </style>
 </head>
 
@@ -26,27 +28,32 @@
 </div>
 
 <script>
-  // Crear mapa
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Crear mapa centrado en Chile
   const map = L.map('map').setView([-33.5, -70.7], 6);
 
-  // Mapa base
+  // Mapa base OpenStreetMap
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  // Punto con timelapse asociado
+  // Marcador con timelapse asociado
   const punto = L.marker([-33.5, -70.7]).addTo(map);
 
+  // Acción al hacer click en el marcador
   punto.on('click', () => {
     document.getElementById("viewer").innerHTML = `
       <h3>Estación ejemplo</h3>
       <video controls autoplay loop muted width="500" height="300">
         <source src="https://alexiscaro2021.github.io/Time-lapse-cameras-for-snow-cover-monitoring-in-Chile/timelapse_v2.mp4" type="video/mp4">
+        Tu navegador no soporta el video.
       </video>
     `;
   });
+
+});
 </script>
 
 </body>
 </html>
-<!-- force rebuild -->
