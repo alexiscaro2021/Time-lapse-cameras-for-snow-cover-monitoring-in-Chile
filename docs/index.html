@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Mapa Timelapse</title>
+
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    #map { height: 60vh; }
+    #viewer { padding: 10px; }
+  </style>
+</head>
+
+<body>
+
+<div id="map"></div>
+<div id="viewer">
+  <p>Haz click en un punto del mapa</p>
+</div>
+
+<script>
+  // Crear mapa
+  const map = L.map('map').setView([-33.5, -70.7], 6);
+
+  // Mapa base
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+
+  // Punto con timelapse asociado
+  const punto = L.marker([-33.5, -70.7]).addTo(map);
+
+  punto.on('click', () => {
+    document.getElementById("viewer").innerHTML = `
+      <h3>Estación ejemplo</h3>
+      <video controls autoplay loop muted width="500">
+        <source src="timelapse.mp4" type="video/mp4">
+      </video>
+    `;
+  });
+</script>
+
+</body>
+</html>
